@@ -1,0 +1,12 @@
+[submodule "sbsigntool"]
+	path = sbsigntool
+	url = https://github.com/suhho1993/sbsigntool.git
+[submodule "CoreOS_GRUB"]
+	path = CoreOS_GRUB
+	url = https://github.com/suhho1993/CoreOS_GRUB.git
+[submodule "shim"]
+	path = shim
+	url = https://github.com/seehwan/shim.git
+[submodule "opencit-trustagent"]
+	path = opencit-trustagent
+	url = https://github.com/0xc0ffeecafe/opencit-trustagent.git
