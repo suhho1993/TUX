@@ -7,9 +7,6 @@
 [submodule "TS_boot/CoreOS_GRUB"]
 	path = TS_boot/CoreOS_GRUB
 	url = https://github.com/suhho1993/CoreOS_GRUB.git
-[submodule "TS_boot/shim"]
-	path = TS_boot/shim
-	url = https://github.com/suhho1993/shim.git
 [submodule "Integrity_Manager/opencit-trustagent"]
 	path = Integrity_Manager/opencit-trustagent
 	url = https://github.com/0xc0ffeecafe/opencit-trustagent.git
