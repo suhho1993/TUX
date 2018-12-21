@@ -39,7 +39,7 @@ This paper presents the design and implementation of Trust update regarding Linu
  - Update whitelist according to the updates 
 
 # 1.4 Architecure of TUX
- <center> <img src="document/images/TUX_design.png" width="500"></center>
+ <center> <img src="doc/imgs/TUX_design.png" width="500"></center>
 #### Read paper for deatils
 
 # COMPONENTS
@@ -53,8 +53,8 @@ TUX is composed of three parts
 
 # HOW TO INSTALL
  We tested TUX using following environment. However, TS-boot can be used on any platform which runs Ubuntu 16.04 and may run on other versions as well.
->*Build environment
-Ubuntu 16.04.5 LTS
+>Build environment
+>Ubuntu 16.04.5 LTS
 >*Local machine which runned TS-boot
 Dell Optiplex 7040M mini-computer
 Ubuntu server 16.04 LTS x86
@@ -64,5 +64,32 @@ Ubuntu 14.04.5 LTS
 
 ## TS-boot: Grub, shim, keys, and how to sign.
 ### Grub
-This build process is based upon: <https://help.ubuntu.com/community/UEFIBooting#Building_GRUB2_.28U.29EFI>. You may just run the following instructions.
+This build process is based upon: <https://help.ubuntu.com/community/UEFIBooting#Building_GRUB2_.28U.29EFI>. 
+You may just run the following instructions.
 
+Building grub2 requires the following programs to be installed (build dependencies):
+<code>
+```
+sudo apt-get install bison libopts25 libselinux1-dev autogen m4 autoconf help2man libopts25-dev flex libfont-freetype-perl automake autotools-dev libfreetype6-dev texinfo
+```
+</code>
+
+How to build for 64-bit (U)EFI:
+<code>
+```
+./autogen.sh
+export EFI_ARCH=x86_64
+./configure --with-platform=efi --target=${EFI_ARCH} --program-prefix=""
+make
+```
+</code>
+
+How to build EFI application:
+<code>
+```
+led_source_dir>/grub-core
+../grub-mkimage -O ${EFI_ARCH}-efi -d . -o grub.efi -p "" part_gpt part_msdos ntfs ntfscomp hfsplus fat ext2 normal chain boot configfile linux multiboot 
+</code>
+You may change output file name(grub.efi by default) and may add more modules behind multiboot.
+
+After build, you must sign the EFI application. It will be explained later.
