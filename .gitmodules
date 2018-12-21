@@ -10,3 +10,6 @@
 [submodule "Integrity_Manager/opencit-trustagent"]
 	path = Integrity_Manager/opencit-trustagent
 	url = https://github.com/0xc0ffeecafe/opencit-trustagent.git
+[submodule "TS_boot/shim"]
+	path = TS_boot/shim
+	url = https://github.com/seehwan/shim.git
