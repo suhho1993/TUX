@@ -1,43 +1,4 @@
 ```bash
-████████╗██╗   ██╗██╗  ██╗
-╚══██╔══╝██║   ██║╚██╗██╔╝
-   ██║   ██║   ██║ ╚███╔╝ 
-   ██║   ██║   ██║ ██╔██╗ 
-   ██║   ╚██████╔╝██╔╝ ██╗
-   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
-                          
-Trusted Updated regarding Linux Booting
-```
----
-# TUX
-TUX is a novel integrity manager to maintain integrity along with the frequent updates
-
-# Papers and Presentaions 
-
-TUX was introduced at following conferences.
- - Security and Trust Management 2018: [STM 2018](https://link.springer.com/chapter/10.1007/978-3-030-01141-3_7)
- - Linux Security Summit North America 2018:[LSS NA 2018](https://lssna18.sched.com/event/FLYN/updating-linux-with-tux-trustedupdate-on-linux-kernel-suhho-lee-dankook-university)
-
-Vidoes
- - [LSS 2018](https://youtu.be/slNSH2LGBqA)
- - [TUX Demo](https://youtu.be/3RuTvp06vkE)
-
-
-# 1.1 Introduction 
-Preserving integrity is one of the essential requirements in trusted computing. However, when it comes to system update, even with the state-of-the-art integrity management system, such as Open CIT, cannot properly manage integrity information. 
-
-This paper presents the design and implementation of Trust update regarding Linux booting (TUX). With TUX, we overcome existing limitations of the current integrity management solutions. First, TUX manages the integrity of the Linux booting process according to OS kernel updates. This allows TUX to manage its whitelist corresponding to the requested updates and perform remote attestation with appropriate whitelist values. Second, TUX proposes a novel and robust integrity verification method, PCR verification. PCR verification provides robust measurement/validation booting by employing PCR-signed kernel and TS-Boot. With these two properties, TUX ensures the thorough integrity of the Linux boot process. We also demonstrate the concept through TUX prototyping and experimental validation. Also, our experiments demonstrate proof of concepts using the prototype of TUX.
-
-# 1.2 TUX Goals
- - TUX allows Open CIT to transparently mange local updates
- - TUX maintains whitelist according to conducted updates and  perform remote attestation using the up-to-date whites list
- - TUX performs robust measured / verified booting
-
-# 1.3 Features 
- - Verified boot using shim_lock verification
- - PCR verification: TPM measurement comparison with kernel signature to verify entire booting process
- - Update whitelist according to the updates 
-
 # 1.4 Architecure of TUX
  <center> <img src="doc/imgs/TUX_design.png" width="500"></center>
 ### Read paper for deatils
@@ -106,20 +67,20 @@ You may need to install efitools package.
 
 >1. First make keys for yourselves.
 >2. Try to read efi keys.
-<code>
-efi-readvar
-</code>
+><code>
+>efi-readvar
+></code>
 >3. Copy old keys.
-<code>
-mkdir -p -v /etc/efikeys
-chmod -v 700 /etc/efikeys
-cd /etc/efikeys
-
-efi-readvar -v PK -o old_PK.esl
-efi-readvar -v KEK -o old_KEK.esl
-efi-readvar -v db -o old_db.esl
-efi-readvar -v dbx -o old_dbx.esl
-</code>
+><code>
+>mkdir -p -v /etc/efikeys
+>chmod -v 700 /etc/efikeys
+>cd /etc/efikeys
+>
+>efi-readvar -v PK -o old_PK.esl
+>efi-readvar -v KEK -o old_KEK.esl
+>efi-readvar -v db -o old_db.esl
+>efi-readvar -v dbx -o old_dbx.esl
+></code>
 >4. Delete all keys from the BIOS
 >5. Reboot and do efi-readvar to check if the keys are all deleted
 >6. Concatenate old and new keys
