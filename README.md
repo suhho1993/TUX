@@ -67,28 +67,35 @@ You may need to install efitools package.
 
 >1. First make keys for yourselves.
 >2. Try to read efi keys.
-><code>
->efi-readvar
-></code>
+
+<code>
+efi-readvar
+</code>
+
 >3. Copy old keys.
-><code>
->mkdir -p -v /etc/efikeys
->chmod -v 700 /etc/efikeys
->cd /etc/efikeys
->
->efi-readvar -v PK -o old_PK.esl
->efi-readvar -v KEK -o old_KEK.esl
->efi-readvar -v db -o old_db.esl
->efi-readvar -v dbx -o old_dbx.esl
-></code>
+
+<code>
+mkdir -p -v /etc/efikeys
+chmod -v 700 /etc/efikeys
+cd /etc/efikeys
+
+efi-readvar -v PK -o old_PK.esl
+efi-readvar -v KEK -o old_KEK.esl
+efi-readvar -v db -o old_db.esl
+efi-readvar -v dbx -o old_dbx.esl
+</code>
+
 >4. Delete all keys from the BIOS
 >5. Reboot and do efi-readvar to check if the keys are all deleted
 >6. Concatenate old and new keys
+
 <code>
 cat old_KEK.esl custom_KEK.esl > compound_KEK.esl
 cat old_db.esl custom_db.esl > compound_db.esl
 </code>
+
 >7. Do following with exact order. Otherwise it will make a fault and you should re-delete keys and do it over.
+
 <code>
 efi-updatevar -e -f old_dbx.esl dbx
 efi-updatevar -e -f compound_db.esl db
@@ -96,4 +103,5 @@ efi-updatevar -e -f compound_KEK.esl KEK
 eif-updatevar -e -f old_PK.esl PK
 //PK might not work...
 </code>
+
 >8. reboot and the keys will be installed. Check with efi-readvar.
